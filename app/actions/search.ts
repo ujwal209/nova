@@ -1,9 +1,8 @@
 "use server";
 
-export async function fetchSerperResults(query: string, category: string = "search") {
+export async function fetchSerperResults(query: string, category: string = "search", page: number = 1) {
   if (!query) return null;
 
-  // Serper has specific endpoints for different categories
   const endpoint = `https://google.serper.dev/${category}`;
 
   const myHeaders = new Headers();
@@ -12,7 +11,8 @@ export async function fetchSerperResults(query: string, category: string = "sear
 
   const raw = JSON.stringify({
     q: query,
-    num: 10 // Number of results to return
+    page: page, // Send the page number to Serper
+    num: 10 
   });
 
   const requestOptions = {
@@ -24,9 +24,8 @@ export async function fetchSerperResults(query: string, category: string = "sear
 
   try {
     const response = await fetch(endpoint, requestOptions);
-    if (!response.ok) throw new Error("Failed to fetch data from Serper");
-    const result = await response.json();
-    return result;
+    if (!response.ok) throw new Error(`Failed to fetch data from Serper`);
+    return await response.json();
   } catch (error) {
     console.error("Serper API Error:", error);
     return null;
