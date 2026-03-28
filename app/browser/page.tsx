@@ -278,7 +278,7 @@ function BrowserWorkspace() {
   };
 
   const ImageResults = () => (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 animate-in fade-in duration-500 max-w-[1200px]">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 animate-in fade-in duration-500 w-full">
       {results?.images?.map((item: any, idx: number) => (
         <a key={idx} href={item.link} target="_blank" rel="noreferrer" className="flex flex-col gap-2 group transition-all duration-300">
           <div className="rounded-xl overflow-hidden bg-slate-100 aspect-square relative border border-slate-200 shadow-sm group-hover:shadow-md">
@@ -360,7 +360,7 @@ function BrowserWorkspace() {
             {/* Minimal Logo */}
             <div 
               onClick={() => { setQuery(""); setHasSearched(false); router.push('/browser'); }}
-              className="flex items-center justify-center font-black text-2xl tracking-tighter text-blue-600 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex items-center justify-center font-black text-xl sm:text-2xl tracking-tighter text-blue-600 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
             >
               Nova.
             </div>
@@ -397,8 +397,8 @@ function BrowserWorkspace() {
           <div className="flex-1 flex flex-col h-full bg-white">
             {/* Category Tabs */}
             <div className="w-full border-b border-slate-200 shrink-0 z-10 relative">
-              <div className="max-w-[1200px] mx-auto xl:mx-0 px-4 sm:px-8 lg:px-[130px]">
-                <Tabs value={activeCategory} onValueChange={(v) => updateUrl(activeSearch, v, 1)} className="w-full max-w-[700px]">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-[130px]">
+                <Tabs value={activeCategory} onValueChange={(v) => updateUrl(activeSearch, v, 1)} className="w-full">
                   <TabsList className="bg-transparent h-14 p-0 gap-6 flex w-full justify-start overflow-x-auto hide-scrollbar">
                     {CATEGORIES.map((cat) => {
                       const Icon = cat.icon;
@@ -414,8 +414,8 @@ function BrowserWorkspace() {
             </div>
 
             {/* SEARCH RESULTS SCROLL CONTAINER */}
-            <div className="flex-1 overflow-y-auto py-6 sm:py-8 custom-scrollbar min-h-0 relative z-10 w-full">
-              <div className="max-w-[1200px] mx-auto xl:mx-0 px-4 sm:px-8 lg:px-[130px]">
+            <div className="flex-1 overflow-y-auto py-6 sm:py-8 custom-scrollbar min-h-0 relative z-10 w-full scroll-smooth">
+              <div className="max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-[130px]">
                 
                 {/* AI OVERVIEW BLOCK (Only on All/Search tab) */}
                 {activeCategory === "search" && currentPage === 1 && (
@@ -477,11 +477,11 @@ function BrowserWorkspace() {
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/20 rounded-full blur-[100px] pointer-events-none -z-10 mix-blend-multiply"></div>
 
             <div className="flex flex-col items-center w-full max-w-3xl p-6 sm:-mt-20 z-10">
-               <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter mb-8 text-center bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-blue-800 to-indigo-900 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+               <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6 sm:mb-8 text-center bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-blue-800 to-indigo-900 animate-in fade-in slide-in-from-bottom-6 duration-1000">
                  Nova.
                </h1>
                
-               <p className="text-slate-500 text-lg sm:text-xl font-medium mb-12 text-center max-w-xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-150">
+               <p className="text-slate-500 text-base sm:text-lg md:text-xl font-medium mb-8 sm:mb-12 text-center max-w-xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-150 px-4">
                  The intelligent browser. Search the web, synthesize complex answers, and extract data instantly.
                </p>
 
@@ -491,9 +491,9 @@ function BrowserWorkspace() {
                    <Input 
                      type="text" value={query} onChange={(e) => setQuery(e.target.value)} onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                      placeholder="Ask anything..."
-                     className="w-full rounded-full pl-6 pr-16 py-8 sm:py-9 text-lg sm:text-xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] border border-slate-200/80 bg-white/90 backdrop-blur-xl focus-visible:ring-0 focus-visible:border-blue-400 transition-all text-slate-900 placeholder:text-slate-400 font-medium" 
+                     className="w-full rounded-full pl-6 pr-14 sm:pr-16 py-7 sm:py-8 md:py-9 text-base sm:text-lg md:text-xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] border border-slate-200/80 bg-white/90 backdrop-blur-xl focus-visible:ring-0 focus-visible:border-blue-400 transition-all text-slate-900 placeholder:text-slate-400 font-medium" 
                    />
-                   <Button type="submit" disabled={!query.trim()} className="absolute right-3 rounded-full w-12 h-12 sm:w-14 sm:h-14 p-0 bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 transition-all shadow-md disabled:opacity-50 disabled:hover:scale-100">
+                   <Button type="submit" disabled={!query.trim()} className="absolute right-2 sm:right-3 rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 p-0 bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 transition-all shadow-md disabled:opacity-50 disabled:hover:scale-100">
                      <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
                    </Button>
                  </form>

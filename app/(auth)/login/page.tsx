@@ -5,7 +5,7 @@ import { loginWithPassword, sendLoginOTP } from "@/app/actions/auth";
 import { useRouter } from "next/navigation";
 import { 
   Loader2, Mail, Lock, ShieldCheck, 
-  Layers, Globe, Box, ArrowRight
+  Layers, Globe, Box, ArrowRight, Sparkles
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
       setError(result.error || "Authentication failed. Check your credentials.");
       setIsLoading(false);
     } else {
-      router.push("/docs");
+      router.push("/");
     }
   }
 
@@ -55,28 +55,17 @@ export default function LoginPage() {
 
         {/* Value Proposition */}
         <div className="max-w-[420px] my-auto">
-          <h1 className="text-3xl font-semibold tracking-tight mb-4 leading-tight">
-            Enterprise-grade document intelligence.
+          <h1 className="text-4xl font-semibold tracking-tighter mb-6 leading-tight">
+            Your intelligent, unified workspace.
           </h1>
-          <p className="text-zinc-400 text-[15px] mb-10 leading-relaxed">
-            A high-performance rich text environment integrated with live web research, multi-agent AI analysis, and secure collaborative synchronization.
+          <p className="text-zinc-400 text-[16px] mb-10 leading-relaxed font-medium">
+            Everything you need—from research to collaboration—in one high-performance environment powered by agentic AI.
           </p>
 
           <div className="space-y-6">
-            <div className="flex gap-4 items-start">
-              <Globe className="w-5 h-5 text-zinc-300 shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-white text-sm mb-1">Dynamic Research</h3>
-                <p className="text-[13px] text-zinc-500 leading-snug">Connect your workspace to the live web for instant, fact-checked analysis without leaving the editor.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 items-start">
-              <Layers className="w-5 h-5 text-zinc-300 shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-white text-sm mb-1">Secure Synchronization</h3>
-                <p className="text-[13px] text-zinc-500 leading-snug">Multi-device real-time collaboration backed by enterprise-grade data management.</p>
-              </div>
+            <div className="flex gap-4 items-center">
+              <Sparkles className="w-6 h-6 text-zinc-300 shrink-0" />
+              <p className="text-[14px] text-zinc-400 leading-snug font-medium italic italic">Start building something great.</p>
             </div>
           </div>
         </div>
@@ -84,7 +73,7 @@ export default function LoginPage() {
         {/* Trust Badge */}
         <div className="flex items-center gap-2 text-[13px] text-zinc-500 font-medium">
           <ShieldCheck className="w-4 h-4" />
-          <span>End-to-end encrypted connection</span>
+          <span>Secured by Supabase Authentication</span>
         </div>
       </div>
 
@@ -163,7 +152,7 @@ export default function LoginPage() {
                {useOTP ? 'Log in with password instead' : 'Log in with one-time code'}
              </button>
              <p className="text-[13px] text-zinc-500">
-               Need an account? <a href="/signup" className="text-zinc-900 font-medium hover:underline underline-offset-4">Contact your IT admin</a>
+               Need an account? <a href="/signup" className="text-zinc-900 font-medium hover:underline underline-offset-4">Create account</a>
              </p>
           </div>
         </div>

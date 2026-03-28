@@ -67,7 +67,9 @@ export function Navbar() {
   };
 
   // 2. EARLY RETURN PLACED *AFTER* ALL HOOKS HAVE BEEN CALLED
-  if (pathname === '/login') return null;
+  // HIDE NAVBAR ON AUTH AND ONBOARDING
+  const authPaths = ['/login', '/signup', '/onboarding'];
+  if (authPaths.includes(pathname)) return null;
 
   // 3. RENDER UI
   return (
