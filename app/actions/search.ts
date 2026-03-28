@@ -12,7 +12,7 @@ export async function fetchSerperResults(query: string, category: string = "sear
   const raw = JSON.stringify({
     q: query,
     page: page, // Send the page number to Serper
-    num: 10 
+    num: 20 // Boosted to 20 results per page for deeper browsing
   });
 
   const requestOptions = {

@@ -4,21 +4,15 @@ export async function fetchAutocomplete(query: string) {
   if (!query || query.length < 2) return [];
 
   try {
-    const serperHeaders = new Headers();
-    serperHeaders.append("X-API-KEY", process.env.SERPER_API_KEY as string);
-    serperHeaders.append("Content-Type", "application/json");
-
-    const response = await fetch("https://google.serper.dev/autocomplete", {
-      method: "POST",
-      headers: serperHeaders,
-      body: JSON.stringify({ q: query }),
-    });
+    // We use the open Firefox client endpoint for Google Suggest. 
+    // It is blazing fast, perfectly formatted, and saves your paid Serper credits.
+    const response = await fetch(`https://suggestqueries.google.com/complete/search?client=firefox&q=${encodeURIComponent(query)}`);
 
     if (!response.ok) return [];
     
-    // The API returns an array of suggestions
+    // Google returns format: ["query", ["suggestion1", "suggestion2", ...]]
     const data = await response.json();
-    return data || [];
+    return data[1] || []; 
   } catch (error) {
     console.error("Autocomplete Error:", error);
     return [];
