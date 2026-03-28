@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback, memo, useMemo } from "react";
+import { useState, useRef, useEffect, useCallback, memo, useMemo, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createDocument, getDocument, saveDocument, getDocuments, deleteDocument } from "../actions/docs";
 import { chatWithDocsAgent } from "../actions/docs_agent";
@@ -51,7 +51,9 @@ const TypewriterMarkdown = memo(({ content, isTyping, onComplete }: { content: s
 });
 TypewriterMarkdown.displayName = "TypewriterMarkdown";
 
-export default function DocsPage() {
+
+
+function DocsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const docId = searchParams.get("id");
@@ -754,5 +756,18 @@ export default function DocsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function DocsPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-[calc(100dvh-64px)] sm:h-[calc(100dvh-80px)] w-full flex flex-col items-center justify-center bg-white">
+        <Loader2 className="w-6 h-6 animate-spin text-zinc-950 mb-4" />
+        <p className="text-zinc-500 text-sm font-bold tracking-widest uppercase">Loading Workspace...</p>
+      </div>
+    }>
+      <DocsContent />
+    </Suspense>
   );
 }
